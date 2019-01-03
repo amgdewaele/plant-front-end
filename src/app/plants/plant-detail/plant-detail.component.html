@@ -1,0 +1,72 @@
+<div class="row" *ngIf="currentPlant">
+  <div class="col-xs-12">
+    <h2>{{ currentPlant.name }}</h2>
+  </div>
+  <div class="col-xs-12">
+    <img
+      [src]="currentPlant.imagePath"
+      alt="{{ currentPlant.name }}"
+      class="img-responsive pull-right"
+      style="max-height: 300px; height: 150px;">
+    <p>{{ currentPlant.description }}</p>
+    <label>Genus:</label>
+    <p>{{ currentPlant.genus }}</p>
+    <label>Type:</label>
+    <p>{{ currentPlant.type }}</p>
+    <label>Water level:</label>
+    <p>{{ currentPlant.waterLevel }}</p>
+    <label>Sun level:</label>
+    <p>{{ currentPlant.sunLevel }}</p>
+  </div>
+  <hr>
+  <div class="col-xs-12">
+    <label *ngIf="currentPlant.nicknames[0]">Nicknames:</label>
+    <ul>
+      <li *ngFor="let nickname of currentPlant.nicknames">
+        {{ nickname.name }}
+      </li>
+    </ul>
+  </div>
+  <hr>
+  <div class="col-xs-12" *ngIf="plantLists !== null && currentList !== null">
+
+    <div class="btn-group" appDropdown>
+      <button
+        type="button"
+        class="btn btn-default dropdown-toggle"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false">
+        Add to list <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li *ngFor="let list of plantLists">
+          <a
+          (click)="toPlantList(list._id)">
+            {{ list.room }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<div class="panel panel-default profile-area" *ngIf="!auth.isAuthenticated()">
+  <div class="panel-heading"><h3>Please login to use this application</h3></div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+
+        <div class="app-msg-helper">
+          <p class="bg-primary">You shouldn't be here!</p>
+        </div>
+
+        <img class="img-responsive img-rounded clearfix " src="https://media.giphy.com/media/3o6fIQzTpZkvB573UI/giphy.gif" />
+
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+</div>
